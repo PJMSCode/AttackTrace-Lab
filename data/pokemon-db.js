@@ -1,4 +1,4 @@
-const pokemonTable = [
+window.pokemonTable = [
   // Generation 1
   { pokedex_number: 1, name: "Bulbasaur", type_1: "Grass", type_2: "Poison", base_stat_total: 318 },
   { pokedex_number: 2, name: "Ivysaur", type_1: "Grass", type_2: "Poison", base_stat_total: 405 },

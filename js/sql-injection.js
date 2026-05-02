@@ -3,6 +3,8 @@ const input = document.getElementById("sql-input");
 const appResponse = document.getElementById("app-response");
 const generatedLog = document.getElementById("generated-log");
 
+const pokemonTable = window.pokemonTable || [];
+
 const fakeSensitiveTables = {
   admin_users: [
     {
