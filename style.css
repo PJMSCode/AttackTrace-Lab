@@ -136,6 +136,58 @@ a {
   color: var(--accent);
 }
 
+.lab-form {
+  margin-top: 1.5rem;
+}
+
+.lab-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.lab-input-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.lab-input-row input {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #050814;
+  color: var(--text-main);
+}
+
+.lab-results {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.result-card {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--bg-card);
+}
+
+.mini-code {
+  margin-top: 0.75rem;
+  box-shadow: none;
+}
+
+@media (max-width: 700px) {
+  .lab-input-row,
+  .lab-results {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+}
+
 .hero {
   width: min(1120px, calc(100% - 2rem));
   margin: 0 auto;

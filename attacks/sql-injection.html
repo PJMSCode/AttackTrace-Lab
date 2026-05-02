@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Injection Lab | LONAVA</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header attack-page-header">
+    <nav class="navbar">
+      <a class="logo" href="../index.html">LONAVA</a>
+
+      <div class="nav-links">
+        <a href="../index.html#overview">Overview</a>
+
+        <div class="dropdown">
+          <span class="dropdown-toggle">Attack Types</span>
+
+          <div class="dropdown-menu">
+            <a href="sql-injection.html">SQL Injection</a>
+            <a href="xss.html">XSS</a>
+            <a href="brute-force.html">Brute Force</a>
+            <a href="path-traversal.html">Path Traversal</a>
+          </div>
+        </div>
+
+        <a href="../index.html#telemetry">Telemetry</a>
+        <a href="../index.html#detections">Detections</a>
+      </div>
+    </nav>
+
+    <section class="hero attack-hero">
+      <p class="eyebrow">Attack Vector Lab</p>
+      <h1>SQL Injection Attempt</h1>
+      <p class="hero-text">
+        This lab demonstrates how suspicious database query manipulation attempts can be represented as structured security telemetry and reviewed by detection logic.
+      </p>
+      <div class="hero-buttons">
+        <a class="button primary" href="#simulated-endpoint">View Simulated Endpoint</a>
+        <a class="button secondary" href="#sample-log">View JSON Log</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Overview</p>
+        <h2>What this attack is trying to do</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Attack Goal</h3>
+          <p>
+            SQL injection attempts try to manipulate database queries by placing unexpected SQL syntax inside user-controlled input fields.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Target Surface</h3>
+          <p>
+            Search bars, login forms, filters, and profile lookup pages are common places where attackers may test injection payloads.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Detection Value</h3>
+          <p>
+            Detecting these patterns helps security teams identify probing activity against public-facing web applications.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="simulated-endpoint" class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Interactive Lab</p>
+        <h2>Try the search endpoint</h2>
+      </div>
+
+      <div class="lab-panel interactive-lab">
+        <div class="endpoint-card">
+          <p class="endpoint-label">GET</p>
+          <code>/search?q=&lt;user_input&gt;</code>
+        </div>
+
+        <p class="panel-text">
+          Enter a normal search term or test a SQL injection-style payload. LONAVA will not execute the input. It only analyzes the pattern and generates a simulated security event.
+        </p>
+
+        <form id="sql-lab-form" class="lab-form">
+          <label for="sql-input">Search Query</label>
+          <div class="lab-input-row">
+            <input id="sql-input" type="text" placeholder="Try: ' OR '1'='1" autocomplete="off" />
+            <button class="button primary" type="submit">Run Search</button>
+          </div>
+        </form>
+
+        <div class="lab-results">
+          <div class="result-card">
+            <h3>Application Response</h3>
+            <p id="app-response">Submit a query to see how the simulated endpoint responds.</p>
+          </div>
+
+          <div class="result-card">
+            <h3>Generated Telemetry</h3>
+            <pre class="code-block mini-code"><code id="generated-log">No event generated yet.</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Payload Examples</p>
+        <h2>Suspicious patterns this lab tracks</h2>
+      </div>
+
+      <div class="payload-grid">
+        <div class="payload-card">
+          <span class="severity high">High</span>
+          <code>' OR '1'='1</code>
+          <p>Classic tautology pattern used to alter query logic.</p>
+        </div>
+
+        <div class="payload-card">
+          <span class="severity medium">Medium</span>
+          <code>admin'--</code>
+          <p>Comment operator attempt that may be used to ignore the rest of a query.</p>
+        </div>
+
+        <div class="payload-card">
+          <span class="severity high">High</span>
+          <code>' UNION SELECT username, password FROM users--</code>
+          <p>Union-based pattern attempting to retrieve unauthorized database fields.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sample-log" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">JSON Telemetry</p>
+        <h2>Example event generated by LONAVA</h2>
+      </div>
+
+      <pre class="code-block"><code>{
+  "timestamp": "2026-05-01T22:45:12Z",
+  "source_ip": "192.168.1.50",
+  "username": "guest",
+  "event_type": "sql_injection_attempt",
+  "route": "/search",
+  "http_method": "GET",
+  "payload": "' OR '1'='1",
+  "severity": "high",
+  "mitre_attack": "T1190",
+  "status": "blocked",
+  "detection_reason": "Detected SQL tautology pattern in query parameter"
+}</code></pre>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Detection Logic</p>
+        <h2>How the rule should think</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Check Input</h3>
+          <p>Inspect user-controlled fields such as search queries, login usernames, filters, and profile IDs.</p>
+        </article>
+
+        <article class="card">
+          <h3>Match Patterns</h3>
+          <p>Look for suspicious SQL operators, tautologies, comment markers, and union-select style payloads.</p>
+        </article>
+
+        <article class="card">
+          <h3>Create Alert</h3>
+          <p>Return a structured alert with severity, route, payload, source IP, and analyst-friendly reasoning.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Detection Preview</p>
+        <h2>Example Python rule output</h2>
+      </div>
+
+      <pre class="code-block"><code>{
+  "alert_name": "SQL Injection Attempt",
+  "severity": "high",
+  "matched_field": "payload",
+  "matched_value": "' OR '1'='1",
+  "reason": "Detected SQL tautology pattern",
+  "recommended_action": "Review source IP activity and search for additional web probing attempts"
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>LONAVA | Built for detection engineering, web security, and security telemetry practice.</p>
+
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
+        <a href="https://github.com/YOUR-GITHUB" target="_blank">GitHub</a>
+        <a href="mailto:YOUR-EMAIL@example.com">Email</a>
+      </div>
+    </div>
+  </footer>
+<script>
+  const form = document.getElementById("sql-lab-form");
+  const input = document.getElementById("sql-input");
+  const appResponse = document.getElementById("app-response");
+  const generatedLog = document.getElementById("generated-log");
+
+  function analyzeSqlInput(query) {
+    const lowered = query.toLowerCase();
+
+    if (lowered.includes("union select")) {
+      return { name: "UNION SELECT pattern", severity: "high" };
+    }
+
+    if (lowered.includes(" or ") && lowered.includes("=")) {
+      return { name: "SQL tautology pattern", severity: "high" };
+    }
+
+    if (query.includes("--") || query.includes("#")) {
+      return { name: "SQL comment operator", severity: "medium" };
+    }
+
+    if (query.includes(";") && (lowered.includes("drop") || lowered.includes("delete") || lowered.includes("update") || lowered.includes("insert"))) {
+      return { name: "Stacked query attempt", severity: "high" };
+    }
+
+    return null;
+  }
+
+  function buildEvent(query, match) {
+    return {
+      timestamp: new Date().toISOString(),
+      source_ip: "client_side_demo",
+      username: "guest",
+      event_type: match ? "sql_injection_attempt" : "normal_search",
+      route: "/search",
+      http_method: "GET",
+      payload: query,
+      severity: match ? match.severity : "informational",
+      mitre_attack: match ? "T1190" : "none",
+      status: match ? "blocked" : "allowed",
+      detection_reason: match ? match.name : "No SQL injection pattern detected"
+    };
+  }
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const query = input.value.trim();
+
+    if (!query) {
+      appResponse.textContent = "No query submitted. Enter a search term or test payload.";
+      generatedLog.textContent = "No event generated yet.";
+      return;
+    }
+
+    const match = analyzeSqlInput(query);
+    const securityEvent = buildEvent(query, match);
+
+    if (match) {
+      appResponse.textContent = "Request blocked. LONAVA detected a suspicious SQL injection-style pattern.";
+    } else {
+      appResponse.textContent = "Search completed for: " + query + ". No suspicious SQL pattern detected.";
+    }
+
+    generatedLog.textContent = JSON.stringify(securityEvent, null, 2);
+  });
+</script>
+</body>
+</html>
