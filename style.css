@@ -1,5 +1,5 @@
 /*
-  LONAVA GitHub Pages Stylesheet
+  PJMSCode GitHub Pages Stylesheet
   This file controls the visual design for the static project website.
   Place this file in the same folder as index.html and name it style.css.
 */
@@ -559,6 +559,26 @@ h3 {
   h1 {
     letter-spacing: -0.05em;
   }
+}
+
+
+
+/* Light mode overrides */
+body.light-mode .site-header {
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 32rem),
+    radial-gradient(circle at top right, rgba(251, 113, 133, 0.08), transparent 28rem),
+    linear-gradient(135deg, #f5f7fb 0%, #eaf0f8 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+body.light-mode .card,
+body.light-mode .attack-item,
+body.light-mode .pipeline-step,
+body.light-mode .code-block {
+  background: linear-gradient(180deg, #ffffff, #f5f7fb);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 
