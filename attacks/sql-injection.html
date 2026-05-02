@@ -212,72 +212,7 @@
       </div>
     </div>
   </footer>
-<script>
-  const form = document.getElementById("sql-lab-form");
-  const input = document.getElementById("sql-input");
-  const appResponse = document.getElementById("app-response");
-  const generatedLog = document.getElementById("generated-log");
-
-  function analyzeSqlInput(query) {
-    const lowered = query.toLowerCase();
-
-    if (lowered.includes("union select")) {
-      return { name: "UNION SELECT pattern", severity: "high" };
-    }
-
-    if (lowered.includes(" or ") && lowered.includes("=")) {
-      return { name: "SQL tautology pattern", severity: "high" };
-    }
-
-    if (query.includes("--") || query.includes("#")) {
-      return { name: "SQL comment operator", severity: "medium" };
-    }
-
-    if (query.includes(";") && (lowered.includes("drop") || lowered.includes("delete") || lowered.includes("update") || lowered.includes("insert"))) {
-      return { name: "Stacked query attempt", severity: "high" };
-    }
-
-    return null;
-  }
-
-  function buildEvent(query, match) {
-    return {
-      timestamp: new Date().toISOString(),
-      source_ip: "client_side_demo",
-      username: "guest",
-      event_type: match ? "sql_injection_attempt" : "normal_search",
-      route: "/search",
-      http_method: "GET",
-      payload: query,
-      severity: match ? match.severity : "informational",
-      mitre_attack: match ? "T1190" : "none",
-      status: match ? "blocked" : "allowed",
-      detection_reason: match ? match.name : "No SQL injection pattern detected"
-    };
-  }
-
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const query = input.value.trim();
-
-    if (!query) {
-      appResponse.textContent = "No query submitted. Enter a search term or test payload.";
-      generatedLog.textContent = "No event generated yet.";
-      return;
-    }
-
-    const match = analyzeSqlInput(query);
-    const securityEvent = buildEvent(query, match);
-
-    if (match) {
-      appResponse.textContent = "Request blocked. LONAVA detected a suspicious SQL injection-style pattern.";
-    } else {
-      appResponse.textContent = "Search completed for: " + query + ". No suspicious SQL pattern detected.";
-    }
-
-    generatedLog.textContent = JSON.stringify(securityEvent, null, 2);
-  });
-</script>
+<script src="../data/pokemon-db.js"></script>
+<script src="../js/sql-injection.js"></script>
 </body>
 </html>

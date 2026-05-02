@@ -175,6 +175,80 @@ a {
   background: var(--bg-card);
 }
 
+.lab-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.result-card {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--bg-card);
+}
+
+.result-card:first-child {
+  max-height: 32rem;
+  overflow-y: auto;
+}
+
+.fake-query {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: #050814;
+  color: #dbeafe;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.sql-output {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.sql-table-name {
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.sql-output table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.sql-output th,
+.sql-output td {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.sql-output th {
+  color: var(--accent);
+  background: #050814;
+}
+
+.sql-output td {
+  color: var(--text-muted);
+}
+
+.vulnerable-response {
+  padding: 1rem;
+  border: 1px solid rgba(251, 113, 133, 0.35);
+  border-radius: 1rem;
+  background: rgba(251, 113, 133, 0.08);
+}
+
+.vulnerable-response h3 {
+  color: var(--danger);
+}
+
 .mini-code {
   margin-top: 0.75rem;
   box-shadow: none;
