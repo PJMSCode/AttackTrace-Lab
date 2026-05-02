@@ -7,199 +7,224 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <header class="site-header attack-page-header">
-    <nav class="navbar">
-      <a class="logo" href="../index.html">LONAVA</a>
+<header class="site-header attack-page-header">
+  <nav class="navbar">
+    <a class="logo" href="../index.html">LONAVA</a>
 
-      <div class="nav-links">
-        <a href="../index.html#overview">Overview</a>
+    <div class="nav-links">
+      <a href="../index.html#overview">Overview</a>
 
-        <div class="dropdown">
-          <span class="dropdown-toggle">Attack Types</span>
+      <div class="dropdown">
+        <span class="dropdown-toggle">Attack Types</span>
 
-          <div class="dropdown-menu">
-            <a href="sql-injection.html">SQL Injection</a>
-            <a href="xss.html">XSS</a>
-            <a href="brute-force.html">Brute Force</a>
-            <a href="path-traversal.html">Path Traversal</a>
-          </div>
+        <div class="dropdown-menu">
+          <a href="sql-injection.html">SQL Injection</a>
+          <a href="xss.html">XSS</a>
+          <a href="brute-force.html">Brute Force</a>
+          <a href="path-traversal.html">Path Traversal</a>
         </div>
-
-        <a href="../index.html#telemetry">Telemetry</a>
-        <a href="../index.html#detections">Detections</a>
-      </div>
-    </nav>
-
-    <section class="hero attack-hero">
-      <p class="eyebrow">Attack Vector Lab</p>
-      <h1>SQL Injection Attempt</h1>
-      <p class="hero-text">
-        This lab demonstrates how suspicious database query manipulation attempts can be represented as structured security telemetry and reviewed by detection logic.
-      </p>
-      <div class="hero-buttons">
-        <a class="button primary" href="#simulated-endpoint">View Simulated Endpoint</a>
-        <a class="button secondary" href="#sample-log">View JSON Log</a>
-      </div>
-    </section>
-  </header>
-
-  <main>
-    <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Overview</p>
-        <h2>What this attack is trying to do</h2>
       </div>
 
-      <div class="card-grid three-columns">
-        <article class="card">
-          <h3>Attack Goal</h3>
-          <p>
-            SQL injection attempts try to manipulate database queries by placing unexpected SQL syntax inside user-controlled input fields.
-          </p>
-        </article>
+      <a href="#lab">Lab</a>
+      <a href="#telemetry">Telemetry</a>
+    </div>
+  </nav>
 
-        <article class="card">
-          <h3>Target Surface</h3>
-          <p>
-            Search bars, login forms, filters, and profile lookup pages are common places where attackers may test injection payloads.
-          </p>
-        </article>
+  <section class="hero attack-hero">
+    <p class="eyebrow">Interactive Web Security Lab</p>
+    <h1>SQL Injection</h1>
+    <p class="hero-text">
+      Learn how SQL injection works by searching a simulated Pokémon database, testing malicious input, and seeing how the application response changes when a query is vulnerable.
+    </p>
+  </section>
+</header>
 
-        <article class="card">
-          <h3>Detection Value</h3>
-          <p>
-            Detecting these patterns helps security teams identify probing activity against public-facing web applications.
-          </p>
-        </article>
-      </div>
-    </section>
+<main>
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Concept</p>
+      <h2>What is SQL injection?</h2>
+    </div>
 
-    <section id="simulated-endpoint" class="section dark-section">
-      <div class="section-heading">
-        <p class="eyebrow">Interactive Lab</p>
-        <h2>Try the search endpoint</h2>
-      </div>
-
-      <div class="lab-panel interactive-lab">
-        <div class="endpoint-card">
-          <p class="endpoint-label">GET</p>
-          <code>/search?q=&lt;user_input&gt;</code>
-        </div>
-
-        <p class="panel-text">
-          Enter a normal search term or test a SQL injection-style payload. LONAVA will not execute the input. It only analyzes the pattern and generates a simulated security event.
+    <div class="card-grid three-columns">
+      <article class="card">
+        <h3>The weakness</h3>
+        <p>
+          SQL injection happens when user input is treated as part of a database query instead of plain text.
         </p>
+      </article>
 
-        <form id="sql-lab-form" class="lab-form">
-          <label for="sql-input">Search Query</label>
-          <div class="lab-input-row">
-            <input id="sql-input" type="text" placeholder="Try: ' OR '1'='1" autocomplete="off" />
-            <button class="button primary" type="submit">Run Search</button>
-          </div>
-        </form>
+      <article class="card">
+        <h3>The attacker goal</h3>
+        <p>
+          The attacker tries to change the query logic to return data they should not be able to access.
+        </p>
+      </article>
 
-        <div class="lab-results">
-          <div class="result-card">
-            <h3>Application Response</h3>
-            <p id="app-response">Submit a query to see how the simulated endpoint responds.</p>
-          </div>
+      <article class="card">
+        <h3>The defender goal</h3>
+        <p>
+          Security teams look for suspicious query patterns and turn them into structured alerts.
+        </p>
+      </article>
+    </div>
+  </section>
 
-          <div class="result-card">
-            <h3>Generated Telemetry</h3>
-            <pre class="code-block mini-code"><code id="generated-log">No event generated yet.</code></pre>
-          </div>
+  <section class="section dark-section">
+    <div class="section-heading">
+      <p class="eyebrow">Database Context</p>
+      <h2>The Table You Are Querying</h2>
+    </div>
+
+    <pre class="code-block"><code>Pokémon 
+---------------------------------------------------------
+pokedex_number | name | type_1 | type_2 | base_stat_total</code></pre>
+
+    <p class="panel-text">
+      Normal searches should return Pokémon records. SQL injection-style input will simulate what could happen if the application built unsafe SQL queries.
+    </p>
+  </section>
+
+  <section id="lab" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Hands-On Lab</p>
+      <h2>Search the Pokémon Database</h2>
+    </div>
+
+    <div class="lab-panel interactive-lab">
+      <div class="endpoint-card">
+        <p class="endpoint-label">GET</p>
+        <code>/search?q=&lt;user_input&gt;</code>
+      </div>
+
+      <p class="panel-text">
+        Try a normal query first, such as <strong>Pikachu</strong>, <strong>Water</strong>, or <strong>Dragon</strong>. Then test a SQL injection payload and compare the application response.
+      </p>
+
+      <form id="sql-lab-form" class="lab-form">
+        <label for="sql-input">Search Query</label>
+
+        <div class="lab-input-row">
+          <input id="sql-input" type="text" placeholder="Try: Pikachu or ' OR '1'='1" autocomplete="off" />
+          <button class="button primary" type="submit">Run Query</button>
+        </div>
+      </form>
+
+      <div class="lab-results">
+        <div class="result-card">
+          <h3>Application Response</h3>
+          <p id="app-response">Submit a query to see the simulated SQL output.</p>
+        </div>
+
+        <div class="result-card">
+          <h3>Generated Telemetry</h3>
+          <pre class="code-block mini-code"><code id="generated-log">No event generated yet.</code></pre>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Payload Examples</p>
-        <h2>Suspicious patterns this lab tracks</h2>
+  <section id="payloads" class="section dark-section">
+    <div class="section-heading">
+      <p class="eyebrow">Payload Testing</p>
+      <h2>Queries To Try</h2>
+    </div>
+
+    <div class="payload-grid">
+      <div class="payload-card">
+        <span class="severity medium">Normal</span>
+        <code>Pikachu</code>
+        <p>Returns rows where the Pokémon name matches the search term.</p>
       </div>
 
-      <div class="payload-grid">
-        <div class="payload-card">
-          <span class="severity high">High</span>
-          <code>' OR '1'='1</code>
-          <p>Classic tautology pattern used to alter query logic.</p>
-        </div>
-
-        <div class="payload-card">
-          <span class="severity medium">Medium</span>
-          <code>admin'--</code>
-          <p>Comment operator attempt that may be used to ignore the rest of a query.</p>
-        </div>
-
-        <div class="payload-card">
-          <span class="severity high">High</span>
-          <code>' UNION SELECT username, password FROM users--</code>
-          <p>Union-based pattern attempting to retrieve unauthorized database fields.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="sample-log" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">JSON Telemetry</p>
-        <h2>Example event generated by LONAVA</h2>
+      <div class="payload-card">
+        <span class="severity medium">Normal</span>
+        <code>Water</code>
+        <p>Returns Pokémon where type_1 or type_2 matches Water.</p>
       </div>
 
-      <pre class="code-block"><code>{
-  "timestamp": "2026-05-01T22:45:12Z",
-  "source_ip": "192.168.1.50",
-  "username": "guest",
-  "event_type": "sql_injection_attempt",
-  "route": "/search",
-  "http_method": "GET",
-  "payload": "' OR '1'='1",
-  "severity": "high",
-  "mitre_attack": "T1190",
-  "status": "blocked",
-  "detection_reason": "Detected SQL tautology pattern in query parameter"
-}</code></pre>
-    </section>
-
-    <section class="section dark-section">
-      <div class="section-heading">
-        <p class="eyebrow">Detection Logic</p>
-        <h2>How the rule should think</h2>
+      <div class="payload-card">
+        <span class="severity high">High</span>
+        <code>' OR '1'='1</code>
+        <p>Simulates a tautology attack where the WHERE clause becomes true.</p>
       </div>
 
-      <div class="card-grid three-columns">
-        <article class="card">
-          <h3>Check Input</h3>
-          <p>Inspect user-controlled fields such as search queries, login usernames, filters, and profile IDs.</p>
-        </article>
-
-        <article class="card">
-          <h3>Match Patterns</h3>
-          <p>Look for suspicious SQL operators, tautologies, comment markers, and union-select style payloads.</p>
-        </article>
-
-        <article class="card">
-          <h3>Create Alert</h3>
-          <p>Return a structured alert with severity, route, payload, source IP, and analyst-friendly reasoning.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Detection Preview</p>
-        <h2>Example Python rule output</h2>
+      <div class="payload-card">
+        <span class="severity high">High</span>
+        <code>' UNION SELECT username, password_hash FROM admin_users--</code>
+        <p>Simulates pulling data from a table the user should not access.</p>
       </div>
 
-      <pre class="code-block"><code>{
-  "alert_name": "SQL Injection Attempt",
-  "severity": "high",
-  "matched_field": "payload",
-  "matched_value": "' OR '1'='1",
-  "reason": "Detected SQL tautology pattern",
-  "recommended_action": "Review source IP activity and search for additional web probing attempts"
-}</code></pre>
-    </section>
-  </main>
+      <div class="payload-card">
+        <span class="severity high">High</span>
+        <code>Pikachu'; DROP TABLE pokemon;</code>
+        <p>Simulates a stacked query attempt.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="telemetry" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Security Telemetry</p>
+      <h2>What Defenders Would Log</h2>
+    </div>
+
+    <div class="interactive-log">
+  <pre class="code-block"><code id="log-view">
+{
+  "<span class="log-field" data-field="timestamp">timestamp</span>": "2026-05-01T22:45:12Z",
+  "<span class="log-field" data-field="source_ip">source_ip</span>": "client_side_demo",
+  "<span class="log-field" data-field="username">username</span>": "guest",
+  "<span class="log-field" data-field="event_type">event_type</span>": "sql_injection_attempt",
+  "<span class="log-field" data-field="route">route</span>": "/search",
+  "<span class="log-field" data-field="http_method">http_method</span>": "GET",
+  "<span class="log-field" data-field="payload">payload</span>": "' OR '1'='1",
+  "<span class="log-field" data-field="result_count">result_count</span>": 1028,
+  "<span class="log-field" data-field="severity">severity</span>": "high",
+  "<span class="log-field" data-field="mitre_attack">mitre_attack</span>": "T1190",
+  "<span class="log-field" data-field="status">status</span>": "exploited",
+  "<span class="log-field" data-field="detection_reason">detection_reason</span>": "SQL tautology pattern"
+}
+</code></pre>
+
+  <div class="log-explainer">
+    <h3 id="field-title">Click a field</h3>
+    <p id="field-description">
+      Select a field in the JSON log to learn what it means and why it matters in a security context.
+    </p>
+  </div>
+</div>
+
+  <section class="section dark-section">
+    <div class="section-heading">
+      <p class="eyebrow">Defensive Takeaway</p>
+      <h2>How This Should Be Prevented</h2>
+    </div>
+
+    <div class="card-grid three-columns">
+      <article class="card">
+        <h3>Use parameterized queries</h3>
+        <p>
+          User input should be passed as data, not directly inserted into SQL strings.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Validate input</h3>
+        <p>
+          Applications should reject unexpected patterns and enforce safe input formats.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Monitor behavior</h3>
+        <p>
+          Logs should capture suspicious payloads, affected routes, source details, and detection reasoning.
+        </p>
+      </article>
+    </div>
+  </section>
+</main>
 
   <footer class="footer">
     <div class="footer-content">
