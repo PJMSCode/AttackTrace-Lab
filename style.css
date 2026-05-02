@@ -560,3 +560,31 @@ h3 {
     letter-spacing: -0.05em;
   }
 }
+
+
+body.light-mode {
+  --bg-main: #f5f7fb;
+  --bg-section: #eaf0f8;
+  --bg-card: #ffffff;
+  --bg-card-soft: #edf3fb;
+  --text-main: #0f1724;
+  --text-muted: #425166;
+  --border: rgba(15, 23, 36, 0.14);
+  --shadow: 0 18px 60px rgba(15, 23, 36, 0.12);
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
