@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LONAVA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="logo">LONAVA</div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#attacks">Attack Types</a>
+        <a href="#telemetry">Telemetry</a>
+        <a href="#detections">Detections</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <p class="eyebrow">Detection Engineering Portfolio Project</p>
+      <h1>Simulated Web Attacks. Structured Security Logs. Custom Detection Rules.</h1>
+      <p class="hero-text">
+        LONAVA is a security engineering project that simulates common web application attack attempts,
+        records each event as JSON telemetry, and analyzes the activity with Python-based detection logic.
+      </p>
+      <div class="hero-buttons">
+        <a class="button primary" href="#telemetry">View Sample Log</a>
+        <a class="button secondary" href="#detections">See Detection Flow</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="overview" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Project Overview</p>
+        <h2>Built to demonstrate practical security engineering skills</h2>
+      </div>
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Attack Simulation</h3>
+          <p>Models common web attack attempts inspired by training labs such as SQL injection, XSS, brute force login attempts, and path traversal.</p>
+        </article>
+        <article class="card">
+          <h3>Security Telemetry</h3>
+          <p>Each attack attempt is converted into structured JSON logs containing timestamps, routes, payloads, source IPs, severity, and MITRE mapping.</p>
+        </article>
+        <article class="card">
+          <h3>Detection Logic</h3>
+          <p>Python detection rules inspect the generated logs and produce analyst-friendly alerts for suspicious behavior.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="attacks" class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Attack Coverage</p>
+        <h2>Initial attack types tracked by the lab</h2>
+      </div>
+      <div class="attack-list">
+        <div class="attack-item">
+          <span class="severity high">High</span>
+          <div>
+            <h3>SQL Injection Attempt</h3>
+            <p>Detects suspicious input patterns such as tautologies, comment operators, and payloads targeting database queries.</p>
+          </div>
+        </div>
+        <div class="attack-item">
+          <span class="severity medium">Medium</span>
+          <div>
+            <h3>Cross-Site Scripting Attempt</h3>
+            <p>Identifies script tags, event handlers, encoded payloads, and suspicious HTML injection attempts.</p>
+          </div>
+        </div>
+        <div class="attack-item">
+          <span class="severity high">High</span>
+          <div>
+            <h3>Brute Force Login</h3>
+            <p>Flags repeated failed login attempts from the same source IP or username within a short time window.</p>
+          </div>
+        </div>
+        <div class="attack-item">
+          <span class="severity medium">Medium</span>
+          <div>
+            <h3>Path Traversal</h3>
+            <p>Detects attempts to access unauthorized files using traversal patterns such as ../ or encoded directory sequences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="telemetry" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">JSON Telemetry</p>
+        <h2>Example attack log format</h2>
+      </div>
+      <pre class="code-block"><code>{
+  "timestamp": "2026-05-01T22:45:12Z",
+  "source_ip": "192.168.1.50",
+  "username": "guest",
+  "event_type": "sql_injection_attempt",
+  "route": "/search",
+  "payload": "' OR '1'='1",
+  "severity": "high",
+  "mitre_attack": "T1190",
+  "user_agent": "Mozilla/5.0",
+  "status": "blocked"
+}</code></pre>
+    </section>
+
+    <section id="detections" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Detection Pipeline</p>
+        <h2>How LONAVA turns events into alerts</h2>
+      </div>
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <span>1</span>
+          <h3>Simulate Request</h3>
+          <p>A user submits input to a vulnerable demo route.</p>
+        </div>
+        <div class="pipeline-step">
+          <span>2</span>
+          <h3>Generate Log</h3>
+          <p>The request is normalized into a structured JSON event.</p>
+        </div>
+        <div class="pipeline-step">
+          <span>3</span>
+          <h3>Run Rule Engine</h3>
+          <p>Python detection rules inspect the event for suspicious behavior.</p>
+        </div>
+        <div class="pipeline-step">
+          <span>4</span>
+          <h3>Create Alert</h3>
+          <p>The detection engine outputs a clear alert with severity and reasoning.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>LONAVA | Built for detection engineering, web security, and security telemetry practice.</p>
+  </footer>
+</body>
+</html>
