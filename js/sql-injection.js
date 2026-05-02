@@ -39,6 +39,78 @@ const fakeSensitiveTables = {
   ]
 };
 
+const fieldInfo = {
+  timestamp: {
+    title: "Timestamp",
+    description: "Indicates when the event occurred. Critical for building timelines during incident response and correlating events across systems."
+  },
+
+  source_ip: {
+    title: "Source IP",
+    description: "Represents where the request originated. Used for identifying attackers, blocking malicious hosts, and detecting repeated behavior."
+  },
+
+  username: {
+    title: "Username",
+    description: "Shows which account was used. Helps determine whether an attack is anonymous or tied to a compromised account."
+  },
+
+  event_type: {
+    title: "Event Type",
+    description: "Categorizes the activity. Allows detection systems to group similar threats and trigger specific alerts."
+  },
+
+  route: {
+    title: "Route",
+    description: "Indicates the endpoint being targeted. Helps identify which parts of an application are under attack."
+  },
+
+  http_method: {
+    title: "HTTP Method",
+    description: "Shows how the request was made (GET, POST, etc.). Useful for identifying unusual behavior patterns."
+  },
+
+  payload: {
+    title: "Payload",
+    description: "The exact input provided by the user. This is often the most important field for identifying attack techniques."
+  },
+
+  result_count: {
+    title: "Result Count",
+    description: "Shows how many records were returned. A sudden increase may indicate data exposure."
+  },
+
+  severity: {
+    title: "Severity",
+    description: "Indicates how dangerous the activity is. Helps analysts prioritize what to investigate first."
+  },
+
+  mitre_attack: {
+    title: "MITRE ATT&CK Mapping",
+    description: "Maps the behavior to a known attack technique. Helps standardize detection and reporting across organizations."
+  },
+
+  status: {
+    title: "Status",
+    description: "Shows whether the request was allowed, blocked, or exploited. Important for understanding impact."
+  },
+
+  detection_reason: {
+    title: "Detection Reason",
+    description: "Explains why the system flagged the event. Helps analysts validate and improve detection logic."
+  }
+};
+
+document.querySelectorAll(".log-field").forEach(field => {
+  field.addEventListener("click", () => {
+    const key = field.dataset.field;
+    const info = fieldInfo[key];
+
+    document.getElementById("field-title").textContent = info.title;
+    document.getElementById("field-description").textContent = info.description;
+  });
+});
+
 function analyzeSqlInput(query) {
   const lowered = query.toLowerCase();
 
