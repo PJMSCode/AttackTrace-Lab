@@ -81,6 +81,61 @@ a {
   color: var(--accent);
 }
 
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+/* The visible text */
+.dropdown-toggle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.dropdown:hover .dropdown-toggle {
+  color: var(--accent);
+}
+
+/* Hidden menu */
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  padding: 0.5rem 0;
+  min-width: 200px;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+/* Show on hover */
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Links inside dropdown */
+.dropdown-menu a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--text-muted);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: var(--bg-card-soft);
+  color: var(--accent);
+}
+
 .hero {
   width: min(1120px, calc(100% - 2rem));
   margin: 0 auto;
@@ -294,6 +349,7 @@ h3 {
 
 .footer-links {
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
   gap: 2rem;
