@@ -664,4 +664,4 @@ body.light-mode .sql-output th {
 .theme-toggle:hover {
   color: var(--accent);
   transform: translateY(-1px);
-}
+};
