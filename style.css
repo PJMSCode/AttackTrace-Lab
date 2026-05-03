@@ -584,7 +584,7 @@ body.light-mode .code-block {
 
 body.light-mode .eyebrow,
 body.light-mode .sql-table-name{
- color: #007485;
+ color: #33aabb;
 }
 
 body.light-mode .log-field {
@@ -608,7 +608,7 @@ body.light-mode {
 }
 
 body.light-mode .footer {
-  background: #eaf0f8;
+  background: linear-gradient(180deg, #eaf0f8, #f5f7fb);
   color: var(--text-muted);
   border-top: 1px solid var(--border);
 }
@@ -617,9 +617,6 @@ body.light-mode .footer-links a:hover {
   color: var(--lightmode-accent);
 }
 
-body.light-mode .footer {
-  background: linear-gradient(180deg, #eaf0f8, #f5f7fb);
-}
 
 body.light-mode .severity.medium {
   color: #5b5000;
@@ -664,4 +661,4 @@ body.light-mode .sql-output th {
 .theme-toggle:hover {
   color: var(--accent);
   transform: translateY(-1px);
-};
+}
