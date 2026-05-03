@@ -85,6 +85,7 @@ a {
 .dropdown {
   position: relative;
   cursor: pointer;
+  padding-bottom: 0.75rem;
 }
 
 /* The visible text */
@@ -101,7 +102,7 @@ a {
 /* Hidden menu */
 .dropdown-menu {
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 0;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -109,16 +110,21 @@ a {
   box-shadow: var(--shadow);
   padding: 0.5rem 0;
   min-width: 200px;
+  z-index: 1000;
 
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transform: translateY(10px);
-  transition: all 0.2s ease;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 }
 
+
 /* Show on hover */
-.dropdown:hover .dropdown-menu {
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
 }
@@ -131,11 +137,17 @@ a {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.dropdown-menu a:hover {
-  background: var(--bg-card-soft);
-  color: var(--accent);
+.dropdown-toggle {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  cursor: pointer;
 }
 
+.dropdown-toggle:hover {
+  color: var(--accent);
+}
 .lab-form {
   margin-top: 1.5rem;
 }
