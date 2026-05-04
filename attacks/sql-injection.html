@@ -4,44 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SQL Injection Lab</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../style.css?v=2" />
 </head>
 <body>
-<header class="site-header attack-page-header">
-  <nav class="navbar">
-    <a class="logo" href="../index.html">PJMSCode</a>
+  <header class="site-header attack-page-header">
+    <nav class="navbar">
+      <a class="logo" href="../index.html">PJMSCode</a>
 
-    <div class="nav-links">
-      <a href="../index.html">Home</a>
+      <div class="nav-links">
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">Attack Labs</button>
 
-      <div class="dropdown">
-        <button class="dropdown-toggle" type="button">Attack Types</button>
-
-        <div class="dropdown-menu">
-          <a href="sql-injection.html">SQL Injection</a>
-          <a href="xss.html">XSS</a>
-          <a href="brute-force.html">Brute Force</a>
-          <a href="path-traversal.html">Path Traversal</a>
+          <div class="dropdown-menu">
+            <a href="sql-injection.html">SQL Injection</a>
+            <a href="xss.html">XSS</a>
+            <a href="brute-force.html">Brute Force</a>
+            <a href="path-traversal.html">Path Traversal</a>
+          </div>
         </div>
-      </div>
 
-      <a href="#lab">Lab</a>
-      <a href="#telemetry">Telemetry</a>
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">Projects</button>
 
-      <button id="theme-toggle" class="theme-toggle" type="button">
-        Light Mode
-      </button>
-    </div>
-  </nav>
+          <div class="dropdown-menu">
+            <a href="homelab.html">Homelab</a>
+            <a href="mobile-security.html">Mobile Security</a>
+            <a href="capstone.html">Capstone</a>
+          </div>
+        </div>
+        
+          <button id="theme-toggle" class="theme-toggle" type="button">Light Mode</button>
+        </div>
+    </nav>
 
-  <section class="hero attack-hero">
-    <p class="eyebrow">Interactive Web Security Lab</p>
-    <h1>SQL Injection</h1>
-    <p class="hero-text">
-      Learn how SQL injection works by searching a simulated Pokémon database, testing malicious input, and seeing how the application response changes when a query is vulnerable.
-    </p>
-  </section>
-</header>
+    <section class="hero attack-hero">
+      <p class="eyebrow">Interactive Web Security Lab</p>
+      <h1>SQL Injection</h1>
+      <p class="hero-text">
+        Learn how SQL injection works by searching a simulated Pokémon database, testing malicious input, and seeing how the application response changes when a query is vulnerable.
+      </p>
+    </section>
+  </header>
 
 <main>
   <section class="section">
