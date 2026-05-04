@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PJMSCode</title>
+  <title>PJMSCode | Security Engineering Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <nav class="navbar">
-      <div class="logo">PJMSCode</div>
+      <a class="logo" href="index.html">PJMSCode</a>
+
       <div class="nav-links">
-        <a href="#overview">Overview</a>
         <div class="dropdown">
-          <button class="dropdown-toggle" type="button">Attack Types</button>
+          <button class="dropdown-toggle">Attack Labs</button>
 
           <div class="dropdown-menu">
             <a href="attacks/sql-injection.html">SQL Injection</a>
@@ -22,25 +22,30 @@
             <a href="attacks/path-traversal.html">Path Traversal</a>
           </div>
         </div>
-        <a href="#telemetry">Telemetry</a>
-        <a href="#detections">Detections</a>
+        <div class="dropdown">
+          <button class="dropdown-toggle">Projects</button>
 
-        <button id="theme-toggle" class="theme-toggle" type="button">
-          Light Mode
-        </button>
+          <div class="dropdown-menu">
+            <a href="projects/homelab.html">Homelab</a>
+            <a href="projects/mobile-security.html">Mobile Security</a>
+            <a href="projects/capstone.html">Capstone</a>
+          </div>
+        </div>
+        <a href="#contact">About Me</a>
+        <button id="theme-toggle" class="theme-toggle" type="button">Light Mode</button>
       </div>
     </nav>
 
     <section class="hero">
-      <p class="eyebrow">Detection Engineering Portfolio Project</p>
-      <h1>Simulated Web Attacks. Structured Security Logs. Custom Detection Rules.</h1>
+      <p class="eyebrow">Security Engineering Portfolio</p>
+      <h1>LONAVA</h1>
       <p class="hero-text">
-        LONAVA is a security engineering project that simulates common web application attack attempts,
-        records each event as JSON telemetry, and analyzes the activity with Python-based detection logic.
+        An interactive web security and detection engineering lab built to simulate attack behavior, generate structured telemetry, and explain how defenders turn suspicious activity into actionable alerts.
       </p>
+
       <div class="hero-buttons">
-        <a class="button primary" href="#telemetry">View Sample Log</a>
-        <a class="button secondary" href="#detections">See Detection Flow</a>
+        <a class="button primary" href="attacks/sql-injection.html">Open SQL Injection Lab</a>
+        <a class="button secondary" href="#projects">View Projects</a>
       </div>
     </section>
   </header>
@@ -48,121 +53,179 @@
   <main>
     <section id="overview" class="section">
       <div class="section-heading">
-        <p class="eyebrow">Project Overview</p>
-        <h2>Built to demonstrate practical security engineering skills</h2>
+        <p class="eyebrow">Featured Lab</p>
+        <h2>Built around attack simulation, telemetry, and detection logic</h2>
       </div>
+
       <div class="card-grid three-columns">
         <article class="card">
           <h3>Attack Simulation</h3>
-          <p>Models common web attack attempts inspired by training labs such as SQL injection, XSS, brute force login attempts, and path traversal.</p>
+          <p>
+            LONAVA provides hands-on labs for common web attack patterns such as SQL injection, XSS, brute force activity, and path traversal.
+          </p>
         </article>
+
         <article class="card">
           <h3>Security Telemetry</h3>
-          <p>Each attack attempt is converted into structured JSON logs containing timestamps, routes, payloads, source IPs, severity, and MITRE mapping.</p>
+          <p>
+            Each lab is designed to show what defenders would log, including payloads, routes, severity, result counts, and detection reasoning.
+          </p>
         </article>
+
         <article class="card">
-          <h3>Detection Logic</h3>
-          <p>Python detection rules inspect the generated logs and produce analyst-friendly alerts for suspicious behavior.</p>
+          <h3>Analyst Training</h3>
+          <p>
+            The site explains why each field matters, helping connect offensive behavior to SOC workflows and detection engineering decisions.
+          </p>
         </article>
       </div>
     </section>
 
-    <section id="attacks" class="section dark-section">
+    <section class="section dark-section">
       <div class="section-heading">
-        <p class="eyebrow">Attack Coverage</p>
-        <h2>Initial attack types tracked by the lab</h2>
+        <p class="eyebrow">Attack Labs</p>
+        <h2>Explore the LONAVA learning modules</h2>
       </div>
+
       <div class="attack-list">
-        <div class="attack-item">
-          <span class="severity high">High</span>
+        <a class="attack-item" href="attacks/sql-injection.html">
+          <span class="severity high">Live</span>
           <div>
-            <h3>SQL Injection Attempt</h3>
-            <p>Detects suspicious input patterns such as tautologies, comment operators, and payloads targeting database queries.</p>
+            <h3>SQL Injection</h3>
+            <p>Search a simulated Pokémon database, test vulnerable query behavior, and inspect generated detection telemetry.</p>
           </div>
-        </div>
-        <div class="attack-item">
-          <span class="severity medium">Medium</span>
+        </a>
+
+        <a class="attack-item" href="attacks/xss.html">
+          <span class="severity medium">Planned</span>
           <div>
-            <h3>Cross-Site Scripting Attempt</h3>
-            <p>Identifies script tags, event handlers, encoded payloads, and suspicious HTML injection attempts.</p>
+            <h3>Cross-Site Scripting</h3>
+            <p>Review script injection attempts, suspicious input patterns, and browser-side security telemetry.</p>
           </div>
-        </div>
-        <div class="attack-item">
-          <span class="severity high">High</span>
+        </a>
+
+        <a class="attack-item" href="attacks/brute-force.html">
+          <span class="severity medium">Planned</span>
           <div>
             <h3>Brute Force Login</h3>
-            <p>Flags repeated failed login attempts from the same source IP or username within a short time window.</p>
+            <p>Track repeated failed login attempts and learn how frequency-based detection logic identifies credential attacks.</p>
           </div>
-        </div>
-        <div class="attack-item">
-          <span class="severity medium">Medium</span>
+        </a>
+
+        <a class="attack-item" href="attacks/path-traversal.html">
+          <span class="severity medium">Planned</span>
           <div>
             <h3>Path Traversal</h3>
-            <p>Detects attempts to access unauthorized files using traversal patterns such as ../ or encoded directory sequences.</p>
+            <p>Analyze attempts to access unauthorized files through traversal patterns and encoded directory sequences.</p>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
-    <section id="telemetry" class="section">
+    <section id="projects" class="section">
       <div class="section-heading">
-        <p class="eyebrow">JSON Telemetry</p>
-        <h2>Example attack log format</h2>
+        <p class="eyebrow">Project Portfolio</p>
+        <h2>Security projects under PJMSCode</h2>
       </div>
-      <pre class="code-block"><code>{
-  "timestamp": "2026-05-01T22:45:12Z",
-  "source_ip": "192.168.1.50",
-  "username": "guest",
-  "event_type": "sql_injection_attempt",
-  "route": "/search",
-  "payload": "' OR '1'='1",
-  "severity": "high",
-  "mitre_attack": "T1190",
-  "user_agent": "Mozilla/5.0",
-  "status": "blocked"
-}</code></pre>
+
+      <div class="card-grid two-columns">
+        <article class="card">
+          <h3>LONAVA</h3>
+          <p>
+            Interactive detection engineering lab focused on web attack simulation, JSON telemetry, and analyst education.
+          </p>
+          <a class="button secondary" href="attacks/sql-injection.html">View Lab</a>
+        </article>
+
+        <article class="card">
+          <h3>Mobile Security Analysis</h3>
+          <p>
+            Case study space for mobile application security research, reverse engineering notes, credential exposure findings, and remediation takeaways.
+          </p>
+          <a class="button secondary" href="#contact">Coming Soon</a>
+        </article>
+
+        <article class="card">
+          <h3>Capstone Project</h3>
+          <p>
+            Case study space for documenting the problem, technical approach, security impact, and lessons learned from the capstone build.
+          </p>
+          <a class="button secondary" href="#contact">Coming Soon</a>
+        </article>
+
+        <article class="card">
+          <h3>Homelab</h3>
+          <p>
+            Multi-network security lab with AD, DNS, SIEM, and segmented environments designed to simulate enterprise infrastructure and detection workflows.
+          </p>
+          <a class="button secondary" href="projects/homelab.html">Coming Soon</a>
+        </article>
+      </div>
     </section>
 
-    <section id="detections" class="section">
+    <section class="section dark-section">
       <div class="section-heading">
         <p class="eyebrow">Detection Pipeline</p>
-        <h2>How LONAVA turns events into alerts</h2>
+        <h2>How LONAVA turns activity into security signal</h2>
       </div>
+
       <div class="pipeline">
         <div class="pipeline-step">
           <span>1</span>
-          <h3>Simulate Request</h3>
-          <p>A user submits input to a vulnerable demo route.</p>
+          <h3>User Input</h3>
+          <p>A visitor submits normal input or an attack-style payload into a lab endpoint.</p>
         </div>
+
         <div class="pipeline-step">
           <span>2</span>
-          <h3>Generate Log</h3>
-          <p>The request is normalized into a structured JSON event.</p>
+          <h3>Application Response</h3>
+          <p>The lab shows how a vulnerable application could respond to the submitted input.</p>
         </div>
+
         <div class="pipeline-step">
           <span>3</span>
-          <h3>Run Rule Engine</h3>
-          <p>Python detection rules inspect the event for suspicious behavior.</p>
+          <h3>Telemetry Event</h3>
+          <p>The behavior is converted into structured JSON containing context defenders would need.</p>
         </div>
+
         <div class="pipeline-step">
           <span>4</span>
-          <h3>Create Alert</h3>
-          <p>The detection engine outputs a clear alert with severity and reasoning.</p>
+          <h3>Detection Reasoning</h3>
+          <p>The event is explained through severity, route, payload, status, and analyst-focused field definitions.</p>
         </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">About Me</p>
+        <h2>Security Engineer focused on detection and real-world systems</h2>
+      </div>
+
+      <div class="card">
+        <p>
+          I am a Cybersecurity Engineer focused on detection engineering, security operations, and building practical systems that simulate real attack behavior. My work centers on bridging offensive techniques with defensive visibility through structured telemetry and detection logic.
+        </p>
+
+        <p>
+          LONAVA is my primary project, designed to reflect how modern SOC environments analyze threats, generate alerts, and interpret attacker behavior. In addition to web security, I also work on homelab infrastructure, mobile security analysis, and applied security research.
+        </p>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>LONAVA | Built for detection engineering, web security, and security telemetry practice.</p>
+    <div class="footer-content">
+      <p>PJMSCode | LONAVA security lab and cybersecurity project portfolio.</p>
 
-        <div class="footer-links">
-      <a href="https://www.linkedin.com/in/pj-james/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/PJMSCode" target="_blank">GitHub</a>
-      <a href="mailto:pjames.csec@gmial.com">Email</a>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
+        <a href="https://github.com/YOUR-GITHUB" target="_blank">GitHub</a>
+        <a href="mailto:YOUR-EMAIL@example.com">Email</a>
+      </div>
+    </div>
   </footer>
 
   <script src="js/theme-toggle.js"></script>
 </body>
-
 </html>
