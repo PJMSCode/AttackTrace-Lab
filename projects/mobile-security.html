@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Security Analysis | PJMSCode</title>
+  <link rel="stylesheet" href="../style.css?v=2" />
+</head>
+<body>
+  <header class="site-header attack-page-header">
+    <nav class="navbar">
+      <a class="logo" href="../index.html">PJMSCode</a>
+
+      <div class="nav-links">
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">Attack Labs</button>
+
+          <div class="dropdown-menu">
+            <a href="../attacks/sql-injection.html">SQL Injection</a>
+            <a href="../attacks/xss.html">XSS</a>
+            <a href="../attacks/brute-force.html">Brute Force</a>
+            <a href="../attacks/path-traversal.html">Path Traversal</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">Projects</button>
+
+          <div class="dropdown-menu">
+            <a href="homelab.html">Homelab</a>
+            <a href="mobile-security.html">Mobile Security</a>
+            <a href="capstone.html">Capstone</a>
+          </div>
+        </div>
+
+        <a href="../index.html#about">About Me</a>
+        <button id="theme-toggle" class="theme-toggle" type="button">Light Mode</button>
+      </div>
+    </nav>
+
+    <section class="hero attack-hero">
+      <p class="eyebrow">Mobile Security Case Study</p>
+      <h1>Analyzing Android Cleaner Apps</h1>
+      <p class="hero-text">
+        A mobile security research project analyzing Android cleaner applications that advertised device optimization but showed signs of ad fraud, permission abuse, persistence, credential exposure, and fake functionality.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="button primary" href="#findings">View Findings</a>
+        <a class="button secondary" href="#artifacts">Download Research</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Overview</p>
+        <h2>Project goal</h2>
+      </div>
+
+      <div class="card">
+        <p>
+          This project examined Android “cleaner” apps, applications that claim to free storage, improve RAM usage, cool the CPU, save battery, or provide security protection. The goal was to determine what permissions these apps requested, whether any were malicious, and what suspicious behaviors appeared during static and dynamic analysis.
+        </p>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Methodology</p>
+        <h2>How the apps were analyzed</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>App Selection</h3>
+          <p>
+            The team selected 20 Android cleaner apps from APKPure, with each app claiming to perform some type of phone cleaning or optimization.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Static Analysis</h3>
+          <p>
+            MobSF was used to review permissions, Android API usage, trackers, exported components, anti-analysis checks, and security scores.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Dynamic Analysis</h3>
+          <p>
+            VirusTotal, sandbox behavior, packet capture, ADB installation, and physical Android testing were used to observe runtime behavior.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="findings" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Key Findings</p>
+        <h2>Cleaner apps were often not clean at all</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Permission Abuse</h3>
+          <p>
+            Many apps requested dangerous permissions that were excessive for a simple cleaner, including storage, account, phone state, system settings, and package installation permissions.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Anti-Analysis Behavior</h3>
+          <p>
+            The project found widespread use of anti-VM and anti-debugging checks, suggesting that some apps were designed to resist inspection.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Ad Fraud Patterns</h3>
+          <p>
+            Several apps used hidden ads, transparent activities, background services, or fake engagement flows to generate advertising revenue.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Fake Optimization</h3>
+          <p>
+            Some “cleaning” buttons only triggered animations, random numbers, or success messages instead of performing meaningful system cleanup.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Credential Exposure</h3>
+          <p>
+            One app exposed a publicly accessible Firebase database containing sensitive VPN configuration data, plaintext credentials, certificates, and keys.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Persistence</h3>
+          <p>
+            Several behaviors supported persistence, including boot receivers, background services, notification abuse, and activity tricks designed to keep the app active.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Technical Deep Dive</p>
+        <h2>Notable app behaviors</h2>
+      </div>
+
+      <div class="attack-list">
+        <article class="attack-item">
+          <span class="severity high">Critical</span>
+          <div>
+            <h3>DU Speed Booster: Public Firebase Exposure</h3>
+            <p>
+              DU Speed Booster contained a hardcoded Firebase database URL that exposed VPN configuration files, plaintext usernames and passwords, OpenVPN certificates, private keys, and TLS authentication secrets.
+            </p>
+          </div>
+        </article>
+
+        <article class="attack-item">
+          <span class="severity high">High</span>
+          <div>
+            <h3>DU Speed Booster: Dynamic Code Loading</h3>
+            <p>
+              The app used DexClassLoader to load additional executable code after installation, allowing behavior to change after static review and making analysis more difficult.
+            </p>
+          </div>
+        </article>
+
+        <article class="attack-item">
+          <span class="severity high">High</span>
+          <div>
+            <h3>SpeedClean: Background Ad Activity</h3>
+            <p>
+              SpeedClean used receivers and activities to trigger ad behavior during screen-off and unlock events, including a 1x1 pixel activity and transparent ad display flows.
+            </p>
+          </div>
+        </article>
+
+        <article class="attack-item">
+          <span class="severity medium">Medium</span>
+          <div>
+            <h3>Fingertip Cleaner: Fake Buttons and HiddenAds Behavior</h3>
+            <p>
+              Fingertip Cleaner presented fake cleaner functionality, used misleading UI flows, requested excessive permissions, and showed behavior aligned with HiddenAds-style adware.
+            </p>
+          </div>
+        </article>
+
+        <article class="attack-item">
+          <span class="severity medium">Medium</span>
+          <div>
+            <h3>Meteor Clean: Suspicious Permission Use</h3>
+            <p>
+              Meteor Clean showed communication with suspicious infrastructure and contained code related to audio recording, location collection, root checks, silent SMS, and silent installation behavior.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Security Skills Demonstrated</p>
+        <h2>What this project shows</h2>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <span>1</span>
+          <h3>Static Analysis</h3>
+          <p>Reviewed APK manifests, permissions, exported components, trackers, obfuscation, and suspicious API usage.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <span>2</span>
+          <h3>Dynamic Testing</h3>
+          <p>Installed APKs in controlled environments and monitored behavior using physical Android testing and packet capture.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <span>3</span>
+          <h3>Threat Research</h3>
+          <p>Connected findings to adware, HiddenAds behavior, dynamic code loading, suspicious permissions, and credential exposure.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <span>4</span>
+          <h3>Risk Communication</h3>
+          <p>Translated technical evidence into clear findings, user impact, and defensive recommendations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Detection Perspective</p>
+        <h2>How defenders could monitor this behavior</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Permission Risk Scoring</h3>
+          <p>
+            Flag apps requesting dangerous permissions that do not align with the stated purpose of the application.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Network Anomalies</h3>
+          <p>
+            Monitor background traffic to ad networks, suspicious domains, public database endpoints, and unexpected infrastructure.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Runtime Behavior</h3>
+          <p>
+            Detect hidden WebViews, transparent activities, boot receivers, dynamic code loading, and background service persistence.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="artifacts" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Research Artifacts</p>
+        <h2>Full paper and presentation</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Research Paper</h3>
+          <p>
+            Full written report covering background, methodology, statistical findings, app-specific analysis, future work, conclusion, and citations.
+          </p>
+          <a class="button primary" href="../assets/mobile-security/Mobile Project Paper.pdf" target="_blank">View Paper</a>
+        </article>
+
+        <article class="card">
+          <h3>Presentation Deck</h3>
+          <p>
+            Slide deck summarizing cleaner app risks, methodology, key findings, app deep dives, and recommendations.
+          </p>
+          <a class="button secondary" href="../assets/mobile-security/Mobile Presentation.pptx" download>Download PPTX</a>
+        </article>
+
+        <article class="card">
+          <h3>Project Takeaway</h3>
+          <p>
+            Cleaner apps can act as privacy and security risks by combining fake utility features with permissions abuse, ad fraud, persistence, and hidden behavior.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>PJMSCode | Mobile security analysis and applied cybersecurity projects.</p>
+
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/pj-james/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/PJMSCode" target="_blank">GitHub</a>
+        <a href="mailto:pjames.csec@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/theme-toggle.js"></script>
+</body>
+</html>
