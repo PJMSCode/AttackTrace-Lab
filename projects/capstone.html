@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capstone Project | PJMSCode</title>
+  <link rel="stylesheet" href="../style.css?v=2" />
+</head>
+<body>
+  <header class="site-header attack-page-header">
+    <nav class="navbar">
+      <a class="logo" href="../index.html">PJMSCode</a>
+
+      <div class="nav-links">
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">Attack Labs</button>
+
+          <div class="dropdown-menu">
+            <a href="../attacks/sql-injection.html">SQL Injection</a>
+            <a href="../attacks/xss.html">XSS</a>
+            <a href="../attacks/brute-force.html">Brute Force</a>
+            <a href="../attacks/path-traversal.html">Path Traversal</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">Projects</button>
+
+          <div class="dropdown-menu">
+            <a href="homelab.html">Homelab</a>
+            <a href="mobile-security.html">Mobile Security</a>
+            <a href="capstone.html">Capstone</a>
+          </div>
+        </div>
+
+        <a href="../index.html#about">About Me</a>
+        <button id="theme-toggle" class="theme-toggle" type="button">Light Mode</button>
+      </div>
+    </nav>
+
+    <section class="hero attack-hero">
+      <p class="eyebrow">NDA-Protected Capstone Case Study</p>
+      <h1>Roles & Permissions Audit</h1>
+      <p class="hero-text">
+        A client-sponsored cybersecurity capstone focused on access control, role-based permissions, separation of duties, and security governance for an organization handling sensitive information.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="button primary" href="#overview">View Case Study</a>
+        <a class="button secondary" href="#skills">Skills Demonstrated</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="card vulnerable-response">
+        <h3>NDA Notice</h3>
+        <p>
+          This project was completed under a non-disclosure agreement. Details have been generalized to protect client confidentiality. Client-specific systems, internal data, screenshots, deliverables, and implementation details are intentionally omitted.
+        </p>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Overview</p>
+        <h2>Improving access control through role and permission review</h2>
+      </div>
+
+      <div class="card">
+        <p>
+          This capstone project focused on auditing roles and permissions across selected business systems for a client organization that handles sensitive user data. The goal was to evaluate whether access aligned with role responsibilities, identify potential separation of duties concerns, and provide recommendations to improve long-term access control governance.
+        </p>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Security Context</p>
+        <h2>Why this work mattered</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Sensitive Data</h3>
+          <p>
+            The client environment involved systems that supported sensitive operational data, making least privilege and access control hygiene important from both security and compliance perspectives.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Broken Access Control</h3>
+          <p>
+            Excessive or inconsistent access can create opportunities for misuse, accidental exposure, privilege abuse, and broader organizational risk.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Governance Gap</h3>
+          <p>
+            The work emphasized the need for clear role definitions, documented permissions, and repeatable procedures for future access reviews.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Methodology</p>
+        <h2>How the audit was approached</h2>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <span>1</span>
+          <h3>Role Review</h3>
+          <p>Grouped roles by business function to understand how access was intended to support operational responsibilities.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <span>2</span>
+          <h3>Permission Mapping</h3>
+          <p>Reviewed permissions assigned to each role and compared them against the role’s expected purpose.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <span>3</span>
+          <h3>SoD Analysis</h3>
+          <p>Identified areas where permissions could create separation of duties concerns or require additional review.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <span>4</span>
+          <h3>Recommendations</h3>
+          <p>Delivered findings focused on documentation, access governance, role clarity, and future review processes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Core Concepts</p>
+        <h2>Access control principles used in the project</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>RBAC</h3>
+          <p>
+            Role-Based Access Control assigns permissions to roles and users to roles, making access easier to manage at scale.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Least Privilege</h3>
+          <p>
+            Users should only have the permissions necessary to perform their job responsibilities.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Separation of Duties</h3>
+          <p>
+            No single user or role should have enough access to complete a sensitive process without oversight or control boundaries.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Findings Summary</p>
+        <h2>High-level observations</h2>
+      </div>
+
+      <div class="attack-list">
+        <article class="attack-item">
+          <span class="severity medium">Governance</span>
+          <div>
+            <h3>Limited role and permission documentation</h3>
+            <p>
+              A major challenge was the lack of complete documentation describing how roles should be created, managed, reviewed, and retired.
+            </p>
+          </div>
+        </article>
+
+        <article class="attack-item">
+          <span class="severity medium">Access</span>
+          <div>
+            <h3>Potential separation of duties review items</h3>
+            <p>
+              Some permissions required additional business validation to confirm whether access was appropriate for the role’s function.
+            </p>
+          </div>
+        </article>
+
+        <article class="attack-item">
+          <span class="severity medium">Process</span>
+          <div>
+            <h3>Need for repeatable access review procedures</h3>
+            <p>
+              The project showed the importance of repeatable access review workflows that can be reused across systems over time.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Recommendations</p>
+        <h2>How the organization could improve access governance</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Document Role Definitions</h3>
+          <p>
+            Maintain clear descriptions of what each role is responsible for and what permissions are required to perform that function.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Create SoD Policies</h3>
+          <p>
+            Define which roles or permissions should be mutually exclusive to reduce the risk of misuse or unauthorized process completion.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Improve Review Cadence</h3>
+          <p>
+            Establish regular access reviews tied to onboarding, offboarding, role changes, and administrative training.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Skills Demonstrated</p>
+        <h2>Security work shown through this project</h2>
+      </div>
+
+      <div class="card-grid three-columns">
+        <article class="card">
+          <h3>Identity & Access Security</h3>
+          <p>
+            Reviewed role design, permission assignment, least privilege, and access control risk.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Audit Methodology</h3>
+          <p>
+            Built a structured review approach for assessing roles, permissions, and potential SoD conflicts.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Security Communication</h3>
+          <p>
+            Translated technical access control issues into client-ready findings, recommendations, and future work.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Framework Alignment</h3>
+          <p>
+            Connected project reasoning to recognized security concepts such as RBAC, least privilege, separation of duties, and access control testing.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Risk-Based Thinking</h3>
+          <p>
+            Prioritized findings based on business function, sensitive data access, and the impact of excessive permissions.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Professional Discretion</h3>
+          <p>
+            Presented the project publicly in a generalized way while respecting NDA boundaries and client confidentiality.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="section-heading">
+        <p class="eyebrow">Artifacts</p>
+        <h2>Supporting materials</h2>
+      </div>
+
+      <div class="card">
+        <p>
+          Because this project was completed under NDA, the full paper, presentation deck, client-specific findings, and internal deliverables are not published on this site. A generalized summary is provided here to demonstrate the project scope, methodology, and skills used without disclosing confidential information.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>PJMSCode | NDA-safe capstone summary and cybersecurity project portfolio.</p>
+
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/pj-james/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/PJMSCode" target="_blank">GitHub</a>
+        <a href="mailto:pjames.csec@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/theme-toggle.js"></script>
+</body>
+</html>
