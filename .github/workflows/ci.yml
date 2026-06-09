@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-site:
+    name: Validate static site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          test -f index.html
+          test -f README.md
+
+      - name: Check for obvious secrets
+        run: |
+          if grep -RniE "(api_key|apikey|secret|password|token)\s*[:=]" . \
+            --exclude-dir=.git \
+            --exclude-dir=.github; then
+            echo "Potential secret found."
+            exit 1
+          fi
