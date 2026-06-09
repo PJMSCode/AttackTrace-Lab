@@ -6,6 +6,10 @@ The project demonstrates how offensive techniques translate into defender visibi
 
 The application is hosted through GitHub Pages and serves as both a portfolio project and a hands-on security education platform.
 
+
+
+### Live Site:
+*https://pjmscode.github.io/AttackTrace-Lab/*
 ---
 
 # Project Goals
