@@ -258,8 +258,6 @@ Planned additions include:
 - Brute Force Lab
 - Path Traversal Lab
 - Homelab Documentation
-- Mobile Security Case Study
-- Access Control Audit Capstone Case Study
 - Additional detection engineering scenarios
 - MITRE ATT&CK mappings across all labs
 
