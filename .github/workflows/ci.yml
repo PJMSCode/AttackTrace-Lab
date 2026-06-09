@@ -26,10 +26,13 @@ jobs:
 
       - name: Check for obvious secrets
         run: |
-          if grep -RniE "(api_key|apikey|secret|password|token)\s*[:=]" . \
+          grep -RniE "(api_key|apikey|secret|password|token)\s*[:=]" . \
             --exclude-dir=.git \
             --exclude-dir=.github \
-            --exclude=js/sql-injection.js; then
-            echo "Potential secret found."
+            --exclude="sql-injection.js" > findings.txt || true
+
+          if [ -s findings.txt ]; then
+            echo "Potential secrets found:"
+            cat findings.txt
             exit 1
           fi
