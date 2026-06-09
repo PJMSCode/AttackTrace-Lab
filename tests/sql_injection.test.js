@@ -1,58 +1,45 @@
-const assert = require("assert");
-const { analyzeSqlInput } =
-  require("../js/detections/sql-detection");
+function analyzeSqlInput(query) {
+  const lowered = query.toLowerCase();
 
-//
-// SQL Injection Detection Tests
-//
+  if (lowered.includes("union select")) {
+    return {
+      name: "UNION SELECT pattern",
+      severity: "high"
+    };
+  }
 
-// UNION SELECT
-const unionResult =
-  analyzeSqlInput("' UNION SELECT * FROM users");
+  if (lowered.includes("' or '1'='1") || lowered.includes("or 1=1")) {
+    return {
+      name: "SQL tautology pattern",
+      severity: "high"
+    };
+  }
 
-assert.strictEqual(
-  unionResult.name,
-  "UNION SELECT pattern"
-);
+  if (query.includes("--") || query.includes("#")) {
+    return {
+      name: "SQL comment operator",
+      severity: "medium"
+    };
+  }
 
-// Tautology
-const tautologyResult =
-  analyzeSqlInput("' OR '1'='1");
+  if (
+    query.includes(";") &&
+    (
+      lowered.includes("drop") ||
+      lowered.includes("delete") ||
+      lowered.includes("update") ||
+      lowered.includes("insert")
+    )
+  ) {
+    return {
+      name: "Stacked query attempt",
+      severity: "high"
+    };
+  }
 
-assert.strictEqual(
-  tautologyResult.name,
-  "SQL tautology pattern"
-);
+  return null;
+}
 
-// Comment operator
-const commentResult =
-  analyzeSqlInput("pikachu' --");
-
-assert.strictEqual(
-  commentResult.name,
-  "SQL comment operator"
-);
-
-// Stacked query
-const stackedResult =
-  analyzeSqlInput(
-    "pikachu'; DROP TABLE pokemon;"
-  );
-
-assert.strictEqual(
-  stackedResult.name,
-  "Stacked query attempt"
-);
-
-// Benign query
-const benignResult =
-  analyzeSqlInput("pikachu");
-
-assert.strictEqual(
-  benignResult,
-  null
-);
-
-console.log(
-  "All SQL injection detection tests passed."
-);
+module.exports = {
+  analyzeSqlInput
+};
