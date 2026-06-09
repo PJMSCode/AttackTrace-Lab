@@ -378,3 +378,11 @@ form.addEventListener("submit", function (event) {
 
   handleNormalQuery(query);
 });
+
+
+// Export for automated testing
+if (typeof module !== "undefined") {
+  module.exports = {
+    analyzeSqlInput
+  };
+}
