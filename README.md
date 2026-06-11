@@ -9,7 +9,7 @@ The application is hosted through GitHub Pages and serves as both a portfolio pr
 
 
 ### Live Site:
-*https://pjmscode.github.io/AttackTrace-Lab/*
+*[https://pjmscode.github.io/AttackTrace-Lab/](http://pjmscode.is-a.dev/)*
 ---
 
 # Project Goals
